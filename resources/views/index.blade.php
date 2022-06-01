@@ -12,7 +12,7 @@
         <h2 class="text-center my-4">Who are you?</h2>
         <div class="row container" style="width: 100%">
             <div class="col-md-4">
-                <a href="{{route('login')}}">
+                <a href="#">
                     <div class="card" >
                         <img src="{{asset('Asset/img/student_avatar.png')}}" class="card-img-top img-fluid" alt="...">
                         <div class="card-body">
@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#">
+                <a href="{{route('teacher.loginView')}}">
                     <div class="card" >
                         <img src="{{asset('Asset/img/teacher_avatar.png')}}" class="card-img-top img-fluid" alt="...">
                         <div class="card-body">
@@ -32,7 +32,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#">
+                <a href="{{route('admin.loginView')}}">
                     <div class="card" >
                         <img src="{{asset('Asset/img/admin_avatar.png')}}" class="card-img-top  img-fluid" alt="...">
                         <div class="card-body">

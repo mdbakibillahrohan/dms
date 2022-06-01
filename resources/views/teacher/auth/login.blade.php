@@ -6,14 +6,14 @@
             class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
                 <img src="{{asset('Asset/logo.png')}}" alt="logo" width="100" class="shadow-light rounded-circle">
-                <h4>Student</h4>
+                <h4>Teacher</h4>
             </div>
             <div class="card card-primary">
                 <div class="card-header">
                     <h4>Login</h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}" class="needs-validation"
+                    <form method="POST" action="{{ route('teacher.login') }}" class="needs-validation"
                           novalidate="">
                         @csrf
                         <div class="form-group">
