@@ -9,21 +9,32 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function login(Request $request){
-        $credentials = [
-            'email'=>$request["email"],
-            'password'=>$request["password"],
-        ];
-        if(Auth::guard('admin')->attempt($credentials)){
-            return redirect()->route('admin.dashboard');
-        }else{
-            return redirect()->route('admin.login');
+        $validateData = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'password']
+        ]);
+        if($validateData){
+            $credentials = [
+                'email'=>$request["email"],
+                'password'=>$request["password"],
+            ];
+            if(Auth::guard('admin')->attempt($credentials)){
+                return redirect()->route('admin.dashboard');
+            }
+            session()->flash('status', "Please enter the right credentials");
+            return redirect()->route('admin.loginView');
+
         }
+
     }
     public function loginView(){
+        if(auth::guard('admin')->check()){
+            return redirect()->route('admin.dashboard');
+        }
         return view('admin.auth.login');
     }
     public function logout(){
-        Auth::logout();
+        Auth::guard('admin')->logout();
         return redirect()->route('admin.loginView');
     }
 }

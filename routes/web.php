@@ -44,7 +44,7 @@ Route::name('teacher.')->group(function (){
         Route::post('login', [\App\Http\Controllers\Teacher\AuthController::class, 'Login'])->name('login');
         Route::get('logout', [\App\Http\Controllers\Teacher\AuthController::class, 'Logout'])->name('logout');
         Route::get('dashboard', function (){
-            return view('teacher.pages.dashboard', ['dashboard_type'=>'admin']);
+            return view('teacher.pages.dashboard', ['dashboard_type'=>'teacher']);
         })->middleware('teacher_auth')->name('dashboard');
     });
 });

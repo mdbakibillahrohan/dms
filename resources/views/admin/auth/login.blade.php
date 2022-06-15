@@ -17,6 +17,12 @@
                           novalidate="">
                         @csrf
                         <div class="form-group">
+                            @if(session('status'))
+                            <div style="display: block" class="invalid-feedback">
+                                {{session('status')}}
+                            </div>
+
+                            @endif
                             <label for="email">Email</label>
                             <input id="email" type="email" @error('email') is-invalid @enderror
                             value="{{ old('email') }}" class="form-control" name="email"

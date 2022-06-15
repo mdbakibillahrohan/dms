@@ -31,6 +31,9 @@ class AuthController extends Controller
 
     public function LoginView()
     {
+        if(auth::guard('teacher')->check()){
+            return redirect()->route('teacher.dashboard');
+        }
         return view('teacher.auth.login');
     }
 
