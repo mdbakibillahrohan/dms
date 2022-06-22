@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Traits\Date;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +20,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => "Rohan User",
             'email' => 'rohanuser@gmail.com',
+            'dob'=>date('dMY'),
             'password' => Hash::make('password'),
         ]);
     }

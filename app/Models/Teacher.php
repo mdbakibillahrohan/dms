@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Http\Models\Menus\MenuPermission;
 
 class Teacher extends Authenticatable
 {
@@ -41,4 +42,14 @@ class Teacher extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get all of the menu_permission for the Teacher
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function menu_permission(): HasMany
+    {
+        return $this->hasMany(MenuPermission::class, 'teacher_id', 'id');
+    }
 }

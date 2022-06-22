@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function login(Request $request){
         $validateData = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required', 'password']
+            'password' => ['required']
         ]);
         if($validateData){
             $credentials = [
@@ -21,7 +21,7 @@ class AuthController extends Controller
             if(Auth::guard('admin')->attempt($credentials)){
                 return redirect()->route('admin.dashboard');
             }
-            session()->flash('status', "Please enter the right credentials");
+            $request->session()->flash('status', "Please enter the right credentials");
             return redirect()->route('admin.loginView');
 
         }

@@ -31,9 +31,7 @@ Route::name('admin.')->group(function (){
         Route::post('login', [\App\Http\Controllers\Admin\AuthController::class, 'login'])->name('login');
         Route::get('login', [\App\Http\Controllers\Admin\AuthController::class, 'loginView'])->name('loginView');
         Route::get('logout', [\App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
-        Route::get('dashboard', function (){
-            return view('admin.pages.dashboard', ['dashboard_type'=>'admin']);
-        })->middleware('admin_auth')->name('dashboard');
+        Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'AdminDashboard'])->middleware('admin_auth')->name('dashboard');
     });
 
 });
@@ -46,5 +44,12 @@ Route::name('teacher.')->group(function (){
         Route::get('dashboard', function (){
             return view('teacher.pages.dashboard', ['dashboard_type'=>'teacher']);
         })->middleware('teacher_auth')->name('dashboard');
+    });
+});
+
+Route::name('student.')->group(function (){
+    Route::prefix('student')->group(function (){
+        Route::get('add', [\App\Http\Controllers\StudentController::class, 'showForm'])->name('add');
+        Route::post('add', [\App\Http\Controllers\StudentController::class, 'add'])->name('add');
     });
 });

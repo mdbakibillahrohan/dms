@@ -17,6 +17,11 @@ class CreateTeachersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->date('dob');
+            $table->string('contact_number');
+            $table->foreignId('gender_id');
+            $table->string('username')->unique();
+            $table->string('picture')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
