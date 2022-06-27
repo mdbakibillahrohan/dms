@@ -24,7 +24,7 @@ class SubmenuSeeder extends Seeder
                 [
                     'menu_id'=>1,
                     'name'=>'All Students',
-                    'route'=>"student.show"
+                    'route'=>"student.list"
                 ],
             )
         );

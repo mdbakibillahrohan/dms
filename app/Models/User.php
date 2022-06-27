@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Student\Semester;
+use App\Models\Student\Shift;
 
 class User extends Authenticatable
 {
@@ -41,4 +43,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class,'semester_id');
+    }
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class,'shift_id');
+    }
 }

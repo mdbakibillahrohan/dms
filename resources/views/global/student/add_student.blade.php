@@ -7,39 +7,59 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form action="{{ route('student.add') }}" method="POST">
+        <form action="{{ route('student.add') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body row">
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Student Name</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Student Name"
-                            name="name">
+                        <input value="{{ old('name') }}" type="text" class="form-control" id="exampleInputEmail1"
+                            placeholder="Student Name" name="name">
+                        @error('name')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div class="form-group">
                         <label for="mothersName">Mother's Name</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Mother's Name"
                             name="mother_name">
+                        @error('mother_name')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="fathersName">Father's Name</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Father's Name"
-                            name='father_name'>
+                        <input value="{{ old('father_name') }}" type="text" class="form-control"
+                            id="exampleInputPassword1" placeholder="Father's Name" name='father_name'>
+                        @error('father_name')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="guridan">Gurdian</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Gurdian"
-                            name="gurdian">
+                        <input value="{{ old('gurdian') }}" type="text" class="form-control" id="exampleInputPassword1"
+                            placeholder="Gurdian" name="gurdian">
+                        @error('gurdian')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="DateOfBirth">Date of Birth</label>
-                        <input type="date" class="form-control" id="exampleInputPassword1" name="dob">
+                        <input value="{{ old('dob') }}" type="date" class="form-control" id="exampleInputPassword1"
+                            name="dob">
+                        @error('dob')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="contactnumber">Contact Number</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Contact Number"
-                            name="contact_number">
+                        <input value="{{ old('contact_number') }}" type="text" class="form-control"
+                            id="exampleInputPassword1" placeholder="Contact Number" name="contact_number">
+                        @error('contact_number')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
 
@@ -49,56 +69,81 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email"
-                            name="email">
+                        <input value="{{ old('email') }}" type="email" class="form-control" id="exampleInputPassword1"
+                            placeholder="Email" name="email">
+                        @error('email')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Username</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1"
-                            placeholder="username has to be unique" name="username">
+                        <input value="{{ old('username') }}" type="text" class="form-control"
+                            id="exampleInputPassword1" placeholder="username has to be unique" name="username">
+                        @error('username')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password"
-                            name="password">
+                        <input value="{{ old('password') }}" type="text" class="form-control"
+                            id="exampleInputPassword1" placeholder="Password" name="password">
+                        @error('password')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="semester">Semester</label>
                         <select name="semester_id" class="custom-select form-control" id="exampleSelectBorder">
                             @foreach ($semester as $sm)
-                                <option value="{{ $sm->id }}">{{ $sm->name }}</option>
+                                <option {{ old('semester_id') == $sm->id ? 'selected' : '' }}
+                                    value="{{ $sm->id }}">
+                                    {{ $sm->name }}
+                                </option>
                             @endforeach
                         </select>
+                        @error('semester_id')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Shift</label>
                         <select name="shift_id" class="custom-select form-control" id="exampleSelectBorder">
                             @foreach ($shift as $sft)
-                                <option value="{{ $sft->id }}">{{ $sft->name }}</option>
+                                <option {{ old('shift_id') == $sft->id ? 'selected' : '' }}
+                                    value="{{ $sft->id }}">
+                                    {{ $sft->name }}</option>
                             @endforeach
                         </select>
+                        @error('shift_id')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Gender</label>
                         <select name="gender_id" class="custom-select form-control" id="exampleSelectBorder">
                             @foreach ($gender as $gnd)
-                                <option value="{{ $gnd->id }}">{{ $gnd->name }}</option>
+                                <option {{ old('gender_id') == $gnd->id ? 'selected' : '' }}
+                                    value="{{ $gnd->id }}">{{ $gnd->name }}</option>
                             @endforeach
                         </select>
+                        @error('gender_id')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label for="exampleInputFile">Photo</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile">
+                                <input type="file" name="photo" class="custom-file-input" id="exampleInputFile">
                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                @error('photo')
+                                    <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
-                            </div>
+
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
 
 
@@ -111,4 +156,14 @@
             </div>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>s
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('notification'))
+            toastr.success("{{ session('notification') }}");
+        @endif
+    </script>
 @endsection

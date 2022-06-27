@@ -15,10 +15,18 @@ class MenuSeeder extends Seeder
     public function run()
     {
         DB::table('menus')->insert(
-            [
-            'id'=>1,
-            'name'=>'Student',
-            ],
+            array(
+                [
+                    'id' => 1,
+                    'name' => 'Student',
+                    'class' => 'fas fa-user-graduate'
+                ],
+                [
+                    'id' => 2,
+                    'name' => 'Session',
+                    'class' => 'fas fa-calendar-alt'
+                ],
+            )
         );
     }
 }

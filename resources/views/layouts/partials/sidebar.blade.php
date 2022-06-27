@@ -11,8 +11,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('Asset/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                    alt="User Image">
+                <img src="{{ storage_path() . '/app/photo/  ?>' }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 @if (Session::has('dashboard_type'))
@@ -51,18 +50,23 @@
                     use App\Models\Menus\Menu;
                     $all_menus = Menu::all();
 
+                    $fullUrl = Request::url();
+                    $host = $_SERVER['HTTP_HOST'];
+                    $route = substr($fullUrl, strlen($host) + 8);
+                    $two = explode('/', $route);
+
                 @endphp
                 <li class="nav-item">
                     @if (Session::has('dashboard_type'))
                         @if (session('dashboard_type')[0] == 'admin')
-                            <a href="{{ route('admin.dashboard') }}" class="nav-link active">
+                            <a href="{{ route('admin.dashboard') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
                                 </p>
                             </a>
                         @elseif(session('dashboard_type')[0] == 'teacher')
-                            <a href="{{ route('teacher.dashboard') }}" class="nav-link active">
+                            <a href="{{ route('teacher.dashboard') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -70,11 +74,10 @@
                             </a>
                         @endif
                     @else
-                        <a href="{{ route('home') }}" class="nav-link active">
+                        <a href="{{ route('home') }}" class="nav-link ">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
-
                             </p>
                         </a>
                     @endif
@@ -83,10 +86,14 @@
                 </li>
 
                 @foreach ($all_menus as $menu)
-                    <li class="nav-item menu-open">
+                    @php
+                        $isThisMenu = $menu->name == ucfirst($two[0]);
+                    @endphp
+                    <li class="nav-item {{ $isThisMenu ? 'menu-open' : '' }}">
 
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <a href="#" class="nav-link {{ $isThisMenu ? 'active' : '' }}">
+                            {{-- <i class="nav-icon fas fa-tachometer-alt"></i> --}}
+                            <i class="nav-icon {{ $menu->class }}"></i>
                             <p>
                                 {{ $menu->name }}
                                 <i class="right fas fa-angle-left"></i>
@@ -95,7 +102,7 @@
                         <ul class="nav nav-treeview">
                             @foreach ($menu->submenu as $submenu)
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ route($submenu->route) }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{ $submenu->name }}</p>
                                     </a>
