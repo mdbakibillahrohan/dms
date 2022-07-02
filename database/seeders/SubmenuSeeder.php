@@ -17,14 +17,24 @@ class SubmenuSeeder extends Seeder
         DB::table('submenus')->insert(
             array(
                 [
-                    'menu_id'=>1,
-                    'name'=>'Add Student',
-                    'route'=>'student.add'
+                    'menu_id' => 1,
+                    'name' => 'Add Student',
+                    'route' => 'student.add'
                 ],
                 [
-                    'menu_id'=>1,
-                    'name'=>'All Students',
-                    'route'=>"student.list"
+                    'menu_id' => 1,
+                    'name' => 'All Students',
+                    'route' => "student.list"
+                ],
+                [
+                    'menu_id' => 2,
+                    'name' => 'All Sessions',
+                    'route' => "session.list"
+                ],
+                [
+                    'menu_id' => 2,
+                    'name' => 'Add Session',
+                    'route' => "session.list"
                 ],
             )
         );

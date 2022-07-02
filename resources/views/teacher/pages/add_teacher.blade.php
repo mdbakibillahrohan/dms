@@ -3,48 +3,24 @@
 @section('main_content')
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Add Student</h3>
+            <h3 class="card-title">Add Teacher</h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form action="{{ route('student.add') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('teacher.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body row">
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Student Name</label>
+                        <label for="exampleInputEmail1">Teacher Name</label>
                         <input value="{{ old('name') }}" type="text" class="form-control" id="exampleInputEmail1"
-                            placeholder="Student Name" name="name">
+                            placeholder="Teacher Name" name="name">
                         @error('name')
                             <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="form-group">
-                        <label for="mothersName">Mother's Name</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Mother's Name"
-                            name="mother_name">
-                        @error('mother_name')
-                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="fathersName">Father's Name</label>
-                        <input value="{{ old('father_name') }}" type="text" class="form-control"
-                            id="exampleInputPassword1" placeholder="Father's Name" name='father_name'>
-                        @error('father_name')
-                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="guridan">Gurdian</label>
-                        <input value="{{ old('gurdian') }}" type="text" class="form-control" id="exampleInputPassword1"
-                            placeholder="Gurdian" name="gurdian">
-                        @error('gurdian')
-                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="form-group">
                         <label for="DateOfBirth">Date of Birth</label>
                         <input value="{{ old('dob') }}" type="date" class="form-control" id="exampleInputPassword1"
@@ -61,12 +37,6 @@
                             <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
-
-                </div>
-
-
-                <div class="col-md-6">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input value="{{ old('email') }}" type="email" class="form-control" id="exampleInputPassword1"
@@ -75,6 +45,13 @@
                             <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
+
+                </div>
+
+
+                <div class="col-md-6">
+
                     <div class="form-group">
                         <label for="exampleInputPassword1">Username</label>
                         <input value="{{ old('username') }}" type="text" class="form-control"
@@ -91,33 +68,7 @@
                             <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="semester">Semester</label>
-                        <select name="semester_id" class="custom-select form-control" id="exampleSelectBorder">
-                            @foreach ($semester as $sm)
-                                <option {{ old('semester_id') == $sm->id ? 'selected' : '' }}
-                                    value="{{ $sm->id }}">
-                                    {{ $sm->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('semester_id')
-                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Shift</label>
-                        <select name="shift_id" class="custom-select form-control" id="exampleSelectBorder">
-                            @foreach ($shift as $sft)
-                                <option {{ old('shift_id') == $sft->id ? 'selected' : '' }}
-                                    value="{{ $sft->id }}">
-                                    {{ $sft->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('shift_id')
-                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+
                     <div class="form-group">
                         <label for="exampleInputPassword1">Gender</label>
                         <select name="gender_id" class="custom-select form-control" id="exampleSelectBorder">
@@ -127,6 +78,18 @@
                             @endforeach
                         </select>
                         @error('gender_id')
+                            <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Gender</label>
+                        <select name="rank_id" class="custom-select form-control" id="exampleSelectBorder">
+                            @foreach ($ranks as $rnk)
+                                <option {{ old('rank_id') == $rnk->id ? 'selected' : '' }} value="{{ $rnk->id }}">
+                                    {{ $rnk->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('rank_id')
                             <div style="display: block" class="error invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -152,7 +115,7 @@
             <!-- /.card-body -->
 
             <div class="card-footer d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">Add Student</button>
+                <button type="submit" class="btn btn-primary">Add Teacher</button>
             </div>
         </form>
     </div>

@@ -24,6 +24,7 @@ class CreateTeachersTable extends Migration
             $table->string('picture')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('ranks_id');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Str;
 // use Image;
@@ -74,7 +74,10 @@ class StudentController extends Controller
             ]);
 
             if ($insert) {
-                $notification = "Successfully Added Student to database";
+                $notification = [
+                    "message" => " Successfully Added Student to database",
+                    "type" => "success"
+                ];
                 $request->session()->flash('notification', $notification);
                 return back();
             }
@@ -113,7 +116,10 @@ class StudentController extends Controller
                 'semester_id' => $request->semester_id,
             ]);
             if ($update) {
-                $notification = "Successfully Updated Student to database";
+                $notification = [
+                    "message" => "Successfully Updated Student to database",
+                    "type" => "success"
+                ];
                 $request->session()->flash('notification', $notification);
                 return back();
             }
@@ -154,9 +160,81 @@ class StudentController extends Controller
     {
         $Student = User::find($id);
         $name = $Student->name;
+        if (Storage::disk('uploaded_files')->exists('photo/' . $Student->picture)) {
+            $deletePic = Storage::disk('uploaded_files')->delete('photo/' . $Student->picture);
+            if ($deletePic) {
+                $Student->delete();
+                $notification = [
+                    "message" => "Successfully deleted $name from database",
+                    "type" => "success"
+                ];
+                session()->flash('notification', $notification);
+                return redirect()->route('student.list');
+            }
+            $notification = [
+                "message" => "Error",
+                "type" => "warning"
+            ];
+        }
         $Student->delete();
-        $notification = "Successfully deleted $name from database";
+        $notification = [
+            "message" => "Successfully deleted $name from database",
+            "type" => "success"
+        ];
         session()->flash('notification', $notification);
         return redirect()->route('student.list');
+        return redirect()->route('student.list');
+    }
+
+    public function changePasswordForm($id)
+    {
+        return view('global.student.change_password', ['id' => $id]);
+    }
+
+    public function changePassword($id, Request $request)
+    {
+        $validate = $request->validate([
+            'yourPassword' => 'required',
+            'newPassword' => 'required|max:15|min:8'
+        ]);
+        if ($validate) {
+            $yourPassword = $request->yourPassword;
+            $newPassword = $request->newPassword;
+            $Student = User::find($id);
+            if (isset(Auth::guard('admin')->user()->name)) {
+                if (Hash::check($yourPassword, Auth::guard('admin')->user()->password)) {
+                    $Student->password = Hash::make($newPassword);
+                    $Student->save();
+                    $notification = [
+                        "message" => "Successfully updated password",
+                        "type" => "success"
+                    ];
+                    session()->flash('notification', $notification);
+                    return back();
+                }
+                $notification = [
+                    "message" => "Your password is incorrect",
+                    "type" => "warning"
+                ];
+                session()->flash('notification', $notification);
+                return back();
+            }
+            if (Hash::check($yourPassword, Auth::guard('teacher')->user()->password)) {
+                $Student->password = Hash::make($newPassword);
+                $Student->save();
+                $notification = [
+                    "message" => "Successfully updated password",
+                    "type" => "success"
+                ];
+                session()->flash('notification', $notification);
+                return back();
+            }
+            $notification = [
+                "message" => "Your password is incorrect",
+                "type" => "warning"
+            ];
+            session()->flash('notification', $notification);
+            return back();
+        }
     }
 }

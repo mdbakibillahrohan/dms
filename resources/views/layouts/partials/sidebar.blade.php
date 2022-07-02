@@ -15,9 +15,9 @@
             </div>
             <div class="info">
                 @if (Session::has('dashboard_type'))
-                    @if (session('dashboard_type')[0] == 'admin')
+                    @if (session('dashboard_type') == 'admin')
                         <a href="#" class="d-block">{{ auth::guard('admin')->user()->name }}</a>
-                    @elseif(session('dashboard_type')[0] == 'teacher')
+                    @elseif(session('dashboard_type') == 'teacher')
                         <a href="#" class="d-block">{{ auth::guard('teacher')->user()->name }}</a>
                     @endif
 
@@ -58,15 +58,17 @@
                 @endphp
                 <li class="nav-item">
                     @if (Session::has('dashboard_type'))
-                        @if (session('dashboard_type')[0] == 'admin')
-                            <a href="{{ route('admin.dashboard') }}" class="nav-link ">
+                        @if (session('dashboard_type') == 'admin')
+                            <a href="{{ route('admin.dashboard') }}"
+                                class="nav-link {{ $two[1] == 'dashboard' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
                                 </p>
                             </a>
-                        @elseif(session('dashboard_type')[0] == 'teacher')
-                            <a href="{{ route('teacher.dashboard') }}" class="nav-link ">
+                        @elseif(session('dashboard_type') == 'teacher')
+                            <a href="{{ route('teacher.dashboard') }}"
+                                class="nav-link {{ $two[1] == 'dashboard' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -120,12 +122,12 @@
                 <li class="nav-item">
 
                     @if (Session::has('dashboard_type'))
-                        @if (session('dashboard_type')[0] == 'admin')
+                        @if (session('dashboard_type') == 'admin')
                             <a href="{{ route('admin.logout') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Logout</p>
                             </a>
-                        @elseif (session('dashboard_type')[0] == 'teacher')
+                        @elseif (session('dashboard_type') == 'teacher')
                             <a href="{{ route('teacher.logout') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-info"></i>
                                 <p>Logout</p>
@@ -136,9 +138,9 @@
                             <i class="nav-icon far fa-circle text-info"></i>
                             <p>Logout</p>
                         </a>
+
+
                     @endif
-
-
                 </li>
             </ul>
         </nav>

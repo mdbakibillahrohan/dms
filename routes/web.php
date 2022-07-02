@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Teacher\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,21 +44,35 @@ Route::name('teacher.')->group(function () {
         Route::get('login', [\App\Http\Controllers\Teacher\AuthController::class, 'LoginView'])->name('loginView');
         Route::post('login', [\App\Http\Controllers\Teacher\AuthController::class, 'Login'])->name('login');
         Route::get('logout', [\App\Http\Controllers\Teacher\AuthController::class, 'Logout'])->name('logout');
-        Route::get('dashboard', function () {
-            return view('teacher.pages.dashboard', ['dashboard_type' => 'teacher']);
-        })->middleware('teacher_auth')->name('dashboard');
+        Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'TeacherDashboard'])->name('dashboard');
+
+        Route::middleware(['menu_permission'])->group(function () {
+            Route::get('/add-teacher', [TeacherController::class, 'create'])->name('add');
+            Route::post('/store-teacher', [TeacherController::class, 'store'])->name('store');
+        });
     });
 });
 
 Route::name('student.')->group(function () {
     Route::prefix('student')->group(function () {
-        Route::middleware(['admin_auth'])->group(function () {
-            Route::get('add', [\App\Http\Controllers\StudentController::class, 'showAddForm'])->name('add');
-            Route::get('edit/{id}', [\App\Http\Controllers\StudentController::class, 'showEditForm'])->name('edit');
-            Route::post('add', [\App\Http\Controllers\StudentController::class, 'add'])->name('add');
-            Route::post('update/{id}', [\App\Http\Controllers\StudentController::class, 'update'])->name('update');
+        Route::middleware(['menu_permission'])->group(function () {
+            Route::get('add', [StudentController::class, 'showAddForm'])->name('add');
+            Route::get('edit/{id}', [StudentController::class, 'showEditForm'])->name('edit');
+            Route::post('add', [StudentController::class, 'add'])->name('add');
+            Route::post('update/{id}', [StudentController::class, 'update'])->name('update');
+            Route::get('/all', [StudentController::class, 'studentList'])->name('list');
+            Route::get('/delete/{id}', [StudentController::class, 'destroy'])->name('delete');
+            Route::get('/change-password/{id}', [StudentController::class, 'changePasswordForm'])->name('changepassword');
+            Route::post('/change-password/{id}', [StudentController::class, 'changePassword'])->name('changepassword');
         });
-        Route::get('/all', [\App\Http\Controllers\StudentController::class, 'studentList'])->name('list');
-        Route::get('/delete/{id}', [\App\Http\Controllers\StudentController::class, 'destroy'])->name('delete');
+    });
+});
+Route::name('session.')->group(function () {
+    Route::prefix('session')->group(function () {
+        Route::middleware(['menu_permission'])->group(function () {
+            Route::get('add', [SessionController::class, 'showform'])->name('add');
+            Route::get('list', [SessionController::class, 'show'])->name('list');
+            Route::post('add', [SessionController::class, 'create'])->name('add');
+        });
     });
 });

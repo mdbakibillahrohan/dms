@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminAuthenticate;
+use App\Http\Middleware\MenuPermission;
+use App\Http\Middleware\MenuPermissionMiddleware;
 use App\Http\Middleware\TeacherAuthenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -56,8 +58,9 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'admin_auth'=>\App\Http\Middleware\AdminAuthenticate::class,
-        'teacher_auth'=>TeacherAuthenticate::class,
+        'menu_permission' => MenuPermissionMiddleware::class,
+        'admin_auth' => \App\Http\Middleware\AdminAuthenticate::class,
+        'teacher_auth' => TeacherAuthenticate::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

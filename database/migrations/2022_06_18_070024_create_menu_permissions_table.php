@@ -18,6 +18,7 @@ class CreateMenuPermissionsTable extends Migration
             $table->integer('teacher_id');
             $table->integer('menu_id');
             $table->integer('submenu_id');
+            $table->string('route');
             $table->timestamps();
         });
     }
