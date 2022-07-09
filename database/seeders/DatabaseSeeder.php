@@ -15,12 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-           AdminSeeder::class,
-           MenuSeeder::class,
-           SubmenuSeeder::class,
-           GenderSeeder::class,
-           SemesterSeeder::class,
-           ShiftSeeder::class,
+            AdminSeeder::class,
+            MenuSeeder::class,
+            SubmenuSeeder::class,
+            GenderSeeder::class,
+            SemesterSeeder::class,
+            ShiftSeeder::class,
+            ProbidhanSeeder::class
         ]);
     }
 }

@@ -110,7 +110,6 @@ class StudentController extends Controller
                 'dob' => $request->dob,
                 'gurdian' => $request->gurdian,
                 'contact_number' => $request->contact_number,
-                'password' => Hash::make($request->password),
                 'gender_id' => $request->gender_id,
                 'shift_id' => $request->shift_id,
                 'semester_id' => $request->semester_id,
@@ -175,6 +174,8 @@ class StudentController extends Controller
                 "message" => "Error",
                 "type" => "warning"
             ];
+            session()->flash('notification', $notification);
+            return redirect()->route('student.list');
         }
         $Student->delete();
         $notification = [
@@ -182,7 +183,6 @@ class StudentController extends Controller
             "type" => "success"
         ];
         session()->flash('notification', $notification);
-        return redirect()->route('student.list');
         return redirect()->route('student.list');
     }
 

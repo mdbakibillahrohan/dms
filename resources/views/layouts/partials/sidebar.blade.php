@@ -10,19 +10,28 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="{{ storage_path() . '/app/photo/  ?>' }}" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                @if (Session::has('dashboard_type'))
-                    @if (session('dashboard_type') == 'admin')
-                        <a href="#" class="d-block">{{ auth::guard('admin')->user()->name }}</a>
-                    @elseif(session('dashboard_type') == 'teacher')
-                        <a href="#" class="d-block">{{ auth::guard('teacher')->user()->name }}</a>
-                    @endif
 
+            @if (Session::has('dashboard_type'))
+                @if (session('dashboard_type') == 'admin')
+                    <div class="image">
+                        <img src="{{ storage_path() . '/app/photo/  ?>' }}" class="img-circle elevation-2"
+                            alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">{{ auth::guard('admin')->user()->name }}</a>
+                    </div>
+                @elseif(session('dashboard_type') == 'teacher')
+                    <div class="image">
+                        <img src="{{ asset('uploaded_files/photo') . '/' . auth::guard('teacher')->user()->picture }}"
+                            class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">{{ auth::guard('teacher')->user()->name }}</a>
+                    </div>
                 @endif
-            </div>
+
+            @endif
+
         </div>
 
         <!-- SidebarSearch Form -->
@@ -49,7 +58,6 @@
 
                     use App\Models\Menus\Menu;
                     $all_menus = Menu::all();
-
                     $fullUrl = Request::url();
                     $host = $_SERVER['HTTP_HOST'];
                     $route = substr($fullUrl, strlen($host) + 8);
@@ -59,21 +67,40 @@
                 <li class="nav-item">
                     @if (Session::has('dashboard_type'))
                         @if (session('dashboard_type') == 'admin')
-                            <a href="{{ route('admin.dashboard') }}"
-                                class="nav-link {{ $two[1] == 'dashboard' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
+                            @if (isset($two[1]))
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="nav-link {{ $two[1] == 'dashboard' ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            @else
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            @endif
                         @elseif(session('dashboard_type') == 'teacher')
-                            <a href="{{ route('teacher.dashboard') }}"
-                                class="nav-link {{ $two[1] == 'dashboard' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
+                            @if (isset($two[1]))
+                                <a href="{{ route('teacher.dashboard') }}"
+                                    class="nav-link {{ $two[1] == 'dashboard' ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            @else
+                                <a href="{{ route('teacher.dashboard') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            @endif
+
                         @endif
                     @else
                         <a href="{{ route('home') }}" class="nav-link ">
@@ -89,7 +116,13 @@
 
                 @foreach ($all_menus as $menu)
                     @php
-                        $isThisMenu = $menu->name == ucfirst($two[0]);
+                        $isThisMenu = false;
+                        if (isset($two[1])) {
+                            if ($two[1] != 'dashboard') {
+                                $isThisMenu = $menu->name == ucfirst($two[0]);
+                            }
+                        }
+
                     @endphp
                     <li class="nav-item {{ $isThisMenu ? 'menu-open' : '' }}">
 

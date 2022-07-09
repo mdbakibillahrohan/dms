@@ -26,6 +26,16 @@ class MenuSeeder extends Seeder
                     'name' => 'Session',
                     'class' => 'fas fa-calendar-alt'
                 ],
+                [
+                    'id' => 3,
+                    'name' => 'Session',
+                    'class' => 'fas fa-user-alt'
+                ],
+                [
+                    'id' => 4,
+                    'name' => 'Subject',
+                    'class' => 'fas fa-book'
+                ],
             )
         );
     }

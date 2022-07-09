@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Http\Models\Menus\MenuPermission;
+use App\Models\Teacher\Teacher_Rank;
 
 class Teacher extends Authenticatable
 {
@@ -48,8 +49,12 @@ class Teacher extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function menu_permission(): HasMany
+    public function menu_permission()
     {
         return $this->hasMany(MenuPermission::class, 'teacher_id', 'id');
+    }
+    public function rank()
+    {
+        return $this->belongsTo(Teacher_Rank::class, 'ranks_id');
     }
 }

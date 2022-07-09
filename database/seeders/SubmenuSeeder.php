@@ -26,6 +26,7 @@ class SubmenuSeeder extends Seeder
                     'name' => 'All Students',
                     'route' => "student.list"
                 ],
+
                 [
                     'menu_id' => 2,
                     'name' => 'All Sessions',
@@ -34,8 +35,30 @@ class SubmenuSeeder extends Seeder
                 [
                     'menu_id' => 2,
                     'name' => 'Add Session',
-                    'route' => "session.list"
+                    'route' => "session.add"
                 ],
+                [
+                    'menu_id' => 3,
+                    'name' => 'Add Teacher',
+                    'route' => "teacher.add"
+                ],
+                [
+                    'menu_id' => 3,
+                    'name' => 'All Teacher',
+                    'route' => "teacher.list"
+                ],
+                [
+                    'menu_id' => 4,
+                    'name' => 'Add Subject',
+                    'route' => "subject.create"
+                ],
+                [
+                    'menu_id' => 4,
+                    'name' => 'All Subject',
+                    'route' => "subject.all"
+                ],
+
+
             )
         );
     }

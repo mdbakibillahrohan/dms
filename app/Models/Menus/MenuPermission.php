@@ -14,9 +14,8 @@ class MenuPermission extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function teacher(): BelongsTo
+    public function teacher()
     {
-        return $this->belongsTo(Teacher::class,);
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
-
 }

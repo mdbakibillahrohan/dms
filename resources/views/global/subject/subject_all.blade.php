@@ -3,10 +3,10 @@
 @section('main_content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">List of Teachers</h3>
+            <h3 class="card-title">List of Subjects</h3>
 
             <div class="card-tools">
-                <form method="get">
+                <form action="{{ route('subject.all') }}" method="get">
                     <div class="input-group input-group-sm" style="width: 150px;">
 
                         <input type="text" name="search" class="form-control float-right" placeholder="Search">
@@ -26,37 +26,34 @@
             <table class="table table-head-fixed text-nowrap table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Contact Number</th>
-                        <th>Rank</th>
-                        <th>Photo</th>
-                        <th>Action</th>
+                        <th>Subject Name</th>
+                        <th>Subject Code</th>
+                        <th>Semester</th>
+                        <th>Probidhan</th>
+                        <th>Actions</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($teachers as $teacher)
+                    @foreach ($subjects as $subject)
                         <tr>
 
-                            <td>{{ $teacher->name }}</td>
-                            <td>{{ $teacher->contact_number }}</td>
-                            <td>{{ $teacher->rank->name }}</td>
-                            <td><img height="30px" width="40px" class="img-fluid"
-                                    src="{{ asset('uploaded_files/photo/' . $teacher->picture) }}" alt=""
-                                    srcset=""></td>
+                            <td>{{ $subject->name }}</td>
+                            <td>{{ $subject->subject_code }}</td>
+                            <td>{{ $subject->semester->name }}</td>
+                            <td>{{ $subject->probidhan->probidhan_name }}</td>
                             <td>
-                                <a class="btn-xs btn-info" href="{{ route('teacher.edit', $teacher->id) }}">Edit</a>
-                                {{-- <a class="btn-xs btn-danger" href="{{ route('teacher.delete', $teacher->id) }}">Delete</a> --}}
+                                <a class="btn-xs btn-info" href="{{ route('subject.edit', $subject->id) }}">Edit</a>
+                                {{-- <a class="btn-xs btn-danger" href="{{ route('student.delete', $student->id) }}">Delete</a> --}}
                                 @php
-                                    $route = route('teacher.delete', $teacher->id);
+                                    $route = route('subject.delete', $subject->id);
                                 @endphp
                                 <button style="background-color: #dc3545;" type="button" class="btn-xs btn-danger"
                                     data-toggle="modal" data-target="#modal-sm"
-                                    onclick="addDataToModal('{{ $teacher->name }}', '{{ $route }}')">
+                                    onclick="addDataToModal('{{ $subject->name }}', '{{ $route }}')">
                                     Delete
                                 </button>
-                                <a class="btn-xs btn-warning"
-                                    href="{{ route('teacher.changepassword', $teacher->id) }}">Change
-                                    Password</a>
+
                             </td>
                         </tr>
                     @endforeach
@@ -66,7 +63,7 @@
         </div>
         <!-- /.card-body -->
     </div>
-    {{-- {{ $teachers->links() }} --}}
+    {{ $subjects->links() }}
 
     <div class="modal fade" id="modal-sm">
         <div class="modal-dialog modal-sm">
