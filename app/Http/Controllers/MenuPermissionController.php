@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menus\Menu;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class MenuPermissionController extends Controller
@@ -15,7 +16,8 @@ class MenuPermissionController extends Controller
     public function index()
     {
         $Menus = Menu::all();
-        return view('teacher.pages.menu_permission.index_menu_permission', ['menus' => $Menus]);
+        $Teachers = Teacher::all();
+        return view('teacher.pages.menu_permission.index_menu_permission', ['menus' => $Menus, 'Teachers' => $Teachers]);
     }
 
     /**

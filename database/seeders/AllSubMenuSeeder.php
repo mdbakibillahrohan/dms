@@ -5,16 +5,16 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SubmenuSeeder extends Seeder
+class AllSubMenuSeeder extends Seeder
 {
     /**
-     * Run tahe database seeds.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        DB::table('submenus')->insert(
+        DB::table('all_sub_menus')->insert(
             array(
                 [
                     'menu_id' => 1,
@@ -26,7 +26,16 @@ class SubmenuSeeder extends Seeder
                     'name' => 'All Students',
                     'route' => "student.list"
                 ],
-
+                [
+                    'menu_id' => 1,
+                    'name' => 'Delete Student',
+                    'route' => 'student.Delete'
+                ],
+                [
+                    'menu_id' => 1,
+                    'name' => 'Edit Students',
+                    'route' => "student.edit"
+                ],
 
 
                 // menu id 2 started
@@ -40,6 +49,16 @@ class SubmenuSeeder extends Seeder
                     'menu_id' => 2,
                     'name' => 'Add Session',
                     'route' => "session.add"
+                ],
+                [
+                    'menu_id' => 2,
+                    'name' => 'Delete Session',
+                    'route' => "session.delete"
+                ],
+                [
+                    'menu_id' => 2,
+                    'name' => 'Edit Session',
+                    'route' => "session.edit"
                 ],
 
 
@@ -56,6 +75,20 @@ class SubmenuSeeder extends Seeder
                     'route' => "teacher.list"
                 ],
                 [
+                    'menu_id' => 3,
+                    'name' => 'Delete Teacher',
+                    'route' => "teacher.delete"
+                ],
+                [
+                    'menu_id' => 3,
+                    'name' => 'Edit Teacher',
+                    'route' => "teacher.edit"
+                ],
+
+
+
+                // here menu_id 4 started
+                [
                     'menu_id' => 4,
                     'name' => 'Add Subject',
                     'route' => "subject.create"
@@ -64,6 +97,16 @@ class SubmenuSeeder extends Seeder
                     'menu_id' => 4,
                     'name' => 'All Subject',
                     'route' => "subject.all"
+                ],
+                [
+                    'menu_id' => 4,
+                    'name' => 'Delete Subject',
+                    'route' => "subject.delete"
+                ],
+                [
+                    'menu_id' => 4,
+                    'name' => 'Edit Subject',
+                    'route' => "subject.edit"
                 ],
 
 

@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-success elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
         <img src="{{ asset('Asset/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -14,7 +14,7 @@
             @if (Session::has('dashboard_type'))
                 @if (session('dashboard_type') == 'admin')
                     <div class="image">
-                        <img src="{{ storage_path() . '/app/photo/  ?>' }}" class="img-circle elevation-2"
+                        <img src="{{ asset('Asset/img/admin.webp') }}" class="img-circle elevation-2"
                             alt="User Image">
                     </div>
                     <div class="info">

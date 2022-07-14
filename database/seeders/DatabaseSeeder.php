@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             GenderSeeder::class,
             SemesterSeeder::class,
             ShiftSeeder::class,
-            ProbidhanSeeder::class
+            ProbidhanSeeder::class,
+            AllSubMenuSeeder::class,
         ]);
     }
 }

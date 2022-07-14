@@ -14,4 +14,9 @@ class Menu extends Model
     {
         return $this->hasMany(Submenu::class, 'menu_id');
     }
+
+    public function allSubMenus()
+    {
+        return $this->hasMany(AllSubMenu::class, 'menu_id');
+    }
 }
