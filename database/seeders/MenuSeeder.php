@@ -36,6 +36,11 @@ class MenuSeeder extends Seeder
                     'name' => 'Subject',
                     'class' => 'fas fa-book'
                 ],
+                [
+                    'id' => 5,
+                    'name' => 'Menu',
+                    'class' => 'fas fa-book'
+                ],
             )
         );
     }

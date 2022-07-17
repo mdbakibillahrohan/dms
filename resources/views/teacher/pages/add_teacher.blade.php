@@ -82,11 +82,11 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Gender</label>
+                        <label for="exampleInputPassword1">Rank</label>
                         <select name="rank_id" class="custom-select form-control" id="exampleSelectBorder">
                             @foreach ($ranks as $rnk)
                                 <option {{ old('rank_id') == $rnk->id ? 'selected' : '' }} value="{{ $rnk->id }}">
-                                    {{ $rnk->name }}</option>
+                                    {{ $rnk->rank_name }}</option>
                             @endforeach
                         </select>
                         @error('rank_id')

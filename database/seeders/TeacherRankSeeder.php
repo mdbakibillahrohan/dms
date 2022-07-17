@@ -18,10 +18,10 @@ class TeacherRankSeeder extends Seeder
         DB::table('teacher__ranks')->insert(
             array(
                 [
-                    "name" => "Instructor",
+                    "rank_name" => "Instructor",
                 ],
                 [
-                    "name" => "JR. Instructor",
+                    "rank_name" => "JR. Instructor",
                 ]
             )
         );

@@ -42,7 +42,6 @@
                                                             <div class="p-0" style="display: none;">
                                                                 <table class="table table-hover">
                                                                     <tbody>
-                                                                        @csrf
                                                                         @foreach ($menu->allSubMenus as $submenu)
                                                                             <tr>
                                                                                 <td>
@@ -110,7 +109,7 @@
                     <div class="card-body box-profile">
                         <div class="text-center">
                             <img id="profile_picture" class="profile-user-img img-fluid img-circle" src=""
-                                alt="">
+                                alt="Not Available">
                         </div>
 
                         <h3 id="profile_name" class="profile-username text-center"> Nina Mcintire</h3>
@@ -144,16 +143,17 @@
                     type: "GET",
                     contentType: "json;",
                     success: function(data) {
-                        teacher_id = data.teacher.id;
-                        var url = "{{ asset('uploaded_files/photo/') }}" + "/" + data.teacher
+                        console.log(data)
+                        teacher_id = data[0].id;
+                        var url = "{{ asset('uploaded_files/photo/') }}" + "/" + data[0]
                             .picture;
                         console.log(url);
                         $('#profile').css({
                             display: 'block'
                         });
                         document.getElementById('profile_picture').src = url;
-                        $('#profile_name').text(data.teacher.name);
-                        $('#profile_rank').text(data.rank.name);
+                        $('#profile_name').text(data[0].name);
+                        $('#profile_rank').text(data[0].rank_name);
                     }
                 });
 
@@ -171,7 +171,6 @@
                                         break;
                                     } else {
                                         all_menus[a].checked = false;
-                                        console.log('no')
                                     }
                                 }
                             }
@@ -205,6 +204,7 @@
 
             if (teacher_id == null) {
                 toastr.warning("Please select user first");
+                menu.checked = false;
 
             } else {
                 if (menu.checked == true) {
@@ -218,7 +218,14 @@
 
                         },
                         success: function(response) {
-                            toastr.success("Access Granted");
+                            if (response.status == 500) {
+                                toastr.warning("Error Occured");
+                                menu.checked = false;
+                            } else {
+                                toastr.success("Access Granted");
+
+                            }
+
                         }
                     });
 

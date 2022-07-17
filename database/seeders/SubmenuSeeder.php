@@ -65,6 +65,11 @@ class SubmenuSeeder extends Seeder
                     'name' => 'All Subject',
                     'route' => "subject.all"
                 ],
+                [
+                    'menu_id' => 5,
+                    'name' => 'All Menu Permissions',
+                    'route' => "menu_permission.all"
+                ],
 
 
             )

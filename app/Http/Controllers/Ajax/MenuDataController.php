@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
+use App\Models\Menus\AllSubMenu;
 use App\Models\Menus\MenuPermission;
 use App\Models\Menus\Submenu;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class MenuDataController extends Controller
 
     public function store(Request $request)
     {
-        $submenu = Submenu::find($request->submenu_id);
+        $submenu = AllSubMenu::find($request->submenu_id);
         $route = $submenu->route;
         $menu_id = $submenu->menu->id;
         $MenuPermission = new MenuPermission();

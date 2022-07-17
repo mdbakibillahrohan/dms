@@ -109,6 +109,13 @@ class AllSubMenuSeeder extends Seeder
                     'route' => "subject.edit"
                 ],
 
+                // here menu_id 5 started
+                [
+                    'menu_id' => 5,
+                    'name' => 'All Menu Permissions',
+                    'route' => "menu_permission.all"
+                ],
+
 
             )
         );

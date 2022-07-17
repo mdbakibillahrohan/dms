@@ -52,7 +52,7 @@
                             @foreach ($ranks as $rnk)
                                 <option {{ $teacher->ranks_id == $rnk->id ? 'selected' : '' }}
                                     value="{{ $rnk->id }}">
-                                    {{ $rnk->name }}</option>
+                                    {{ $rnk->rank_name }}</option>
                             @endforeach
                         </select>
                     </div>

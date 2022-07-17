@@ -104,7 +104,7 @@ Route::name('subject.')->group(function () {
 });
 
 Route::name('menu_permission.')->group(function () {
-    Route::prefix('menu-permission')->group(function () {
+    Route::prefix('menu')->group(function () {
         Route::middleware('menu_permission')->group(function () {
             Route::get('/all', [MenuPermissionController::class, 'index'])->name('all');
         });
@@ -121,6 +121,7 @@ Route::prefix('teacher')->group(function () {
 });
 
 Route::prefix('menu')->group(function () {
+    // this route take teacher id and it returns the all perimissions of a teacher of submenus
     Route::get('/permission/{id}', [MenuDataController::class, 'allPermissions']);
     Route::post('/permission/add', [MenuDataController::class, 'store']);
     Route::post('/permission/delete', [MenuDataController::class, 'destroy']);
