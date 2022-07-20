@@ -12,11 +12,8 @@ class TeacherDataController extends Controller
 {
     public function show($id)
     {
-        $Teacher = Teacher::find($id);
-        $Rank = Teacher_Rank::find($Teacher->ranks_id);
-
-        $JoinTeacher = DB::table('teacher__ranks')->join('teachers', 'teacher__ranks.id', '=', 'teachers.ranks_id')->where('teachers.id', $id)->select('teachers.name', 'teachers.picture', 'teachers.id', 'teacher__ranks.rank_name')->get();
+        $Teacher = DB::table('teacher__ranks')->join('teachers', 'teacher__ranks.id', '=', 'teachers.ranks_id')->where('teachers.id', $id)->select('teachers.name', 'teachers.picture', 'teachers.id', 'teacher__ranks.rank_name')->get();
         // return ['teacher' => $Teacher, 'rank' => $Rank];
-        return $JoinTeacher;
+        return $Teacher;
     }
 }

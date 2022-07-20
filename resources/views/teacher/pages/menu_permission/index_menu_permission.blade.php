@@ -181,7 +181,6 @@
                             }
                         }
 
-
                     }
 
                 });
@@ -190,15 +189,17 @@
 
             });
             // user select has been ended here
-
-
-
-
         });
 
 
 
         function getMenuPermission(id) {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
             let menu = document.getElementById(id);
             let csrf = "{{ csrf_token() }}";
 
@@ -222,7 +223,11 @@
                                 toastr.warning("Error Occured");
                                 menu.checked = false;
                             } else {
-                                toastr.success("Access Granted");
+                                Toast.fire({
+                                    icon: "success",
+                                    title: "Access Granted Successfull"
+                                })
+                                // toastr.success("Access Granted");
 
                             }
 
@@ -240,15 +245,16 @@
 
                         },
                         success: function(response) {
-                            toastr.warning("Access denied");
+                            Toast.fire({
+                                icon: "warning",
+                                title: "Access Denied"
+                            })
+                            // toastr.warning("Access denied");
                         }
                     });
 
                 }
             }
-
-
-
         }
     </script>
 @endsection

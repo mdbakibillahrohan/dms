@@ -37,6 +37,7 @@ class StudentController extends Controller
             'gender_id' => 'required',
             'shift_id' => 'required',
             'semester_id' => 'required',
+            'photo' => 'image'
         ]);
 
         if ($validate) {

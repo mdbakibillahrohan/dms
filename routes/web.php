@@ -8,7 +8,8 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\Student\SubjectController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Teacher\TeacherController;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Universal\ClassRoomController;
+use App\Http\Controllers\Universal\ClassTimeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -111,6 +112,40 @@ Route::name('menu_permission.')->group(function () {
     });
 });
 
+// here started the result routes
+Route::name('result.')->group(function () {
+    Route::prefix('result')->group(function () {
+        Route::middleware('menu_permission')->group(function () {
+            Route::get('/', [MenuPermissionController::class, 'index'])->name('all');
+        });
+    });
+});
+
+
+// here started the class Routes
+Route::name('class.')->group(function () {
+    Route::prefix('class')->group(function () {
+        Route::name('room.')->group(function () {
+            Route::prefix('room')->group(function () {
+                Route::middleware('menu_permission')->group(function () {
+                    Route::get('/all', [ClassRoomController::class, 'index'])->name('all');
+                    Route::get('/add', [ClassRoomController::class, 'create'])->name('add');
+                    Route::get('/delete/{id}', [ClassRoomController::class, 'destroy'])->name('delete');
+                });
+                Route::post('/store', [ClassRoomController::class, 'store'])->name('store');
+                Route::post('/update/{id}', [ClassRoomController::class, 'update'])->name('update');
+            });
+        });
+
+        Route::name('time.')->group(function () {
+            Route::prefix('time')->group(function () {
+                Route::middleware('menu_permission')->group(function () {
+                    Route::get('/', [ClassTimeController::class, 'index']);
+                });
+            });
+        });
+    });
+});
 
 
 // Here started the all ajax route
