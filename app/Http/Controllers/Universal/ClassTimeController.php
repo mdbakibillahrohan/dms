@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Universal;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClassTime;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class ClassTimeController extends Controller
@@ -15,7 +16,8 @@ class ClassTimeController extends Controller
      */
     public function index()
     {
-        return view('global.class.class_time.add_class_time');
+        $Teachers = Teacher::all();
+        return view('global.class.class_time.add_class_time', ['Teachers' => $Teachers]);
     }
 
     /**

@@ -5,3 +5,21 @@
 .btn-primary {
     background-color: #007bff !important;
 }
+
+
+
+/* class time css  */
+.class-time .table-section table {
+    width: 100%;
+    height: 500px;
+}
+
+.class-time .table-section tr td {
+    text-align: center;
+}
+
+
+
+.class-time .table-section .class-routine {
+    padding: 0px 50px 50px 50px;
+}
