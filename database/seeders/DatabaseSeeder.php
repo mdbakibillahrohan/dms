@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ShiftSeeder::class,
             ProbidhanSeeder::class,
             AllSubMenuSeeder::class,
+            DaySeeder::class,
         ]);
     }
 }

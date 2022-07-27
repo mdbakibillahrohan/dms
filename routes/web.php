@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ajax\ClassDataController;
 use App\Http\Controllers\Ajax\MenuDataController;
 use App\Http\Controllers\Ajax\TeacherDataController;
 use App\Http\Controllers\DashboardController;
@@ -160,4 +161,12 @@ Route::prefix('menu')->group(function () {
     Route::get('/permission/{id}', [MenuDataController::class, 'allPermissions']);
     Route::post('/permission/add', [MenuDataController::class, 'store']);
     Route::post('/permission/delete', [MenuDataController::class, 'destroy']);
+});
+
+
+// class data routes
+Route::prefix('class')->group(function () {
+    Route::prefix('time')->group(function () {
+        Route::get('routine-details', [ClassDataController::class, "routineDetails"]);
+    });
 });

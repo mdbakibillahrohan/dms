@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Universal;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassRoom;
 use App\Models\ClassTime;
+use App\Models\Days;
+use App\Models\Student\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -17,7 +20,10 @@ class ClassTimeController extends Controller
     public function index()
     {
         $Teachers = Teacher::all();
-        return view('global.class.class_time.add_class_time', ['Teachers' => $Teachers]);
+        $Subjects = Subject::all();
+        $Days = Days::all();
+        $ClassRooms = ClassRoom::all();
+        return view('global.class.class_time.add_class_time', ['Teachers' => $Teachers, 'Subjects' => $Subjects, 'Days' => $Days, 'ClassRooms' => $ClassRooms]);
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends ('layouts.master')
 
 @section('main_content')
     <div class="class-time">
@@ -15,112 +15,140 @@
                         @endforeach
                     </select>
 
-                    <div class="card mt-3">
-                        <div class="card-header">
-                            <h3 class="card-title">Add Class Time</h3>
+                    <form id="classTimeForm">
+                        @csrf
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h3 class="card-title">Add Class Time</h3>
 
-                            <div class="card-tools">
-                                <i id="add_class_time" style="font-size: 20px; cursor: pointer;"
-                                    class="fas fa-plus-circle"></i>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        {{-- <div class="card-body table-responsive p-0" style="height: 300px; width: 100%">
-                        <table class="table table-head-fixed ">
-                            <thead>
-                                <tr>
-                                    <th>Class Room</th>
-                                    <th>Day</th>
-                                    <th>From</th>
-                                    <th>To</th>
-                                    <th>Subject</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="class_time_table_body">
-                                <tr>
-                                    <form>
-                                        <td>
-                                            <select id="">
-                                                <option value="">101</option>
-                                                <option value="">102</option>
-                                                <option value="">103</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select id="">
-                                                <option value="">101</option>
-                                                <option value="">102</option>
-                                                <option value="">103</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select id="">
-                                                <option value="">101</option>
-                                                <option value="">102</option>
-                                                <option value="">103</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select id="">
-                                                <option value="">101</option>
-                                                <option value="">102</option>
-                                                <option value="">103</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select id="">
-                                                <option value="">101</option>
-                                                <option value="">102</option>
-                                                <option value="">103</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-success">Add</button>
-                                        </td>
-                                    </form>
-                                </tr>
+                                <div class="card-tools">
 
+                                    <i id="add_class_time" style="font-size: 20px; cursor: pointer;"
+                                        class="fas fa-plus-circle"></i>
 
-                            </tbody>
-                        </table>
-                    </div> --}}
-
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Class Room</label>
-                                <select id="room" class="js-example-basic-single form-control"
-                                    style="width: 200px; height:50x;!important" name="state">
-                                    <option selected>Select User</option>
-                                    @foreach ($Teachers as $teacher)
-                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
-                                    placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            <!-- /.card-header -->
+                            {{-- <div div class="card-body table-responsive p-0" style="height: 300px; width: 100%">
+                            <table class="table table-head-fixed ">
+                                <thead>
+                                    <tr>
+                                        <th>Class Room</th>
+                                        <th>Day</th>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Subject</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="class_time_table_body">
+                                    <tr>
+                                        <form>
+                                            <td>
+                                                <select id="">
+                                                    <option value="">101</option>
+                                                    <option value="">102</option>
+                                                    <option value="">103</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="">
+                                                    <option value="">101</option>
+                                                    <option value="">102</option>
+                                                    <option value="">103</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="">
+                                                    <option value="">101</option>
+                                                    <option value="">102</option>
+                                                    <option value="">103</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="">
+                                                    <option value="">101</option>
+                                                    <option value="">102</option>
+                                                    <option value="">103</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="">
+                                                    <option value="">101</option>
+                                                    <option value="">102</option>
+                                                    <option value="">103</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-success">Add</button>
+                                            </td>
+                                        </form>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div> --}}
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Subject</label>
+                                            <select id="subject" class="form-control">
+                                                @foreach ($Subjects as $Subject)
+                                                    <option value="{{ $Subject->id }}">{{ $Subject->name }}</option>
+                                                @endforeach
+
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Class Room</label>
+                                            <select id="class_room" class="form-control">
+                                                @foreach ($ClassRooms as $ClassRoom)
+                                                    <option value="{{ $ClassRoom->id }}">{{ $ClassRoom->class_room_no }}
+                                                    </option>
+                                                @endforeach
+
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Day</label>
+                                            <select id="day" class="form-control">
+
+                                                @foreach ($Days as $Day)
+                                                    <option value="{{ $Day->id }}">{{ $Day->day_name }}
+                                                    </option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>From</label>
+                                            <input id="from" class="form-control" type="time">
+                                            <!-- /.input group -->
+                                        </div>
+                                        <div class="form-group">
+                                            <label>To</label>
+                                            <input id="to" class="form-control" type="time">
+                                            <!-- /.input group -->
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
                             </div>
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card-body -->
-                    </div>
+                    </form>
                 </div>
 
             </div>
@@ -129,6 +157,9 @@
                     <div><b>Name: </b><span id="teacher_name"></span></div>
                     <div><b>Rank: </b><span id="teacher_rank"></span></div>
                 </div>
+                <button onclick="clickMe()">
+                    please click me
+                </button>
                 <table class="class-routine" border="1">
                     <tr>
                         <td>Period</td>
@@ -150,23 +181,65 @@
                         <td>11:45-12:30</td>
                         <td>12:30-01:15</td>
                     </tr>
-                    <tr id="saturday">
+                    <tr id="Saturday">
                         <td>SATURDAY</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                    <tr id="sunday">
+                    <tr id="Sunday">
                         <td>SUNDAY</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                    <tr id="monday">
+                    <tr id="Monday">
                         <td>MONDAY</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                    <tr id="tuesday">
+                    <tr id="Tuesday">
                         <td>TUESDAY</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                    <tr id="wednesday">
+                    <tr id="Wednesday">
                         <td>WEDNESDAY</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                    <tr id="thursday">
+                    <tr id="Thursday">
                         <td>THURSDAY</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </table>
             </div>
@@ -175,8 +248,9 @@
 
 @section('script')
     <script>
+        console.log("This is rohan")
+        var csrf = "{{ csrf_token() }}";
         $(document).ready(function() {
-
             $('.js-example-basic-single').select2();
             $('#state').on('change', function() {
                 $.ajax({
@@ -188,28 +262,9 @@
                         $('#teacher_rank').text(data[0].rank_name);
                     }
                 });
-
-
-
-
             });
-
-            $('#add_class_time').on('click', function() {
-                let tbody = document.getElementById('class_time_table_body');
-                let previousData = tbody.innerHTML;
-                let AddData = previousData + `<tr>
-                                    <td>101</td>
-                                    <td>Sunday</td>
-                                    <td>John Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td>Subject</td>
-                                    <td><span class="tag tag-success">Approved</span></td>
-                                </tr>`;
-                tbody.innerHTML = AddData;
-                $('.js-example-basic-single').select2();
-            });
-
         });
     </script>
+    <script src="{{ asset('js/class_time.js') }}"></script>
 @endsection
 @endsection
