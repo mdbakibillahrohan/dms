@@ -148,12 +148,15 @@
                         var url = "{{ asset('uploaded_files/photo/') }}" + "/" + data[0]
                             .picture;
                         console.log(url);
-                        $('#profile').css({
-                            display: 'block'
-                        });
+
                         document.getElementById('profile_picture').src = url;
                         $('#profile_name').text(data[0].name);
                         $('#profile_rank').text(data[0].rank_name);
+                        $('#profile').css({
+                            transition: '1s ease',
+                            transitionDelay: '1s',
+                            display: 'block'
+                        });
                     }
                 });
 

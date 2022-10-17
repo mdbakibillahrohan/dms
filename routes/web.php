@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "web" middleware group.
 |
 */
 
@@ -46,6 +46,10 @@ Route::name('admin.')->group(function () {
     });
 });
 
+/*
+ From here the teacher routes section started
+
+*/
 Route::name('teacher.')->group(function () {
     Route::prefix('teacher')->group(function () {
         Route::get('login', [\App\Http\Controllers\Teacher\AuthController::class, 'LoginView'])->name('loginView');
@@ -80,7 +84,6 @@ Route::name('student.')->group(function () {
         Route::post('/change-password/{id}', [StudentController::class, 'changePassword'])->name('changepassword');
     });
 });
-
 Route::name('session.')->group(function () {
     Route::prefix('session')->group(function () {
         Route::middleware(['menu_permission'])->group(function () {
